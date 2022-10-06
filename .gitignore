@@ -1,3 +1,5 @@
+case 1:
+
 v = effect("NNum")("Valor").value.toFixed();
 var num =  effect("NNum")("Valor").value.toFixed()*effect("NNum")("Multiplicador");
 num = Comma(num);
@@ -29,3 +31,30 @@ return (output);
 }
 else return number;
 }
+
+	if (Dec==1)
+[n+num+","+("0"+x).slice(-QtdDec)]
+	else [n+num]
+		
+if (Dec==1&&h==2)
+[n+num+"."+("0"+x).slice(-QtdDec)]
+
+	
+	if (Limp==1)
+		[num]
+	if (Edit==1&&Limp==0)
+		[num+n]
+	if (Edit==1&&Dec==1)
+		[num+","+("0"+x).slice(-QtdDec)+n]
+	
+if (Edit==1&&Dec==1&&h==2)
+		[num+"."+("0"+x).slice(-QtdDec)+n]
+	if  (Dec==1&&Limp==1)
+		[num+","+("0"+x).slice(-QtdDec)]
+if  (Dec==1&&Limp==1&&h==2)
+		[num+"."+("0"+x).slice(-QtdDec)]
+	if (h==5)
+v
+
+	break;
+
