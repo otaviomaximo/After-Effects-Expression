@@ -42,7 +42,6 @@ else [n+num]
 	if (Dec == 1 && h == 2)
 			[n+num+"."+("0"+x).slice(-QtdDec)]
 
-	
 	if (Limp == 1)
 			[num]
 	if (Edit == 1 && Limp == 0)
@@ -59,14 +58,49 @@ else [n+num]
 	if  (Dec == 1 && Limp ==1 && h == 2)
 			[num+"."+("0"+x).slice(-QtdDec)]
 	
-	if (h == 5 && Limp == 1)
+	if (h == 6 && Limp == 1)
 			v
-	if (h == 5 && Edit == 1)
+	if (h == 6 && Edit == 1)
 			v + n
    
-    if (h == 5 && Edit == 0 && Limp == 0)
+    if (h == 6 && Edit == 0 && Limp == 0)
 			n + v
 	
+	if (h == 5)
+		
+var numSlider = effect("NNum")("Valor").value.toFixed(0);
+var n = numSlider;
+	
+	if (numSlider < 1000)
+			n
+	
+	if(numSlider > 1000)
+		Math.round(n)%1000 + "k"
+	
+	if(numSlider == 1000)
+			1 + "k"
+	
+	if(numSlider > 2000)
+			Math.round(n)%2000 + "m"
+	
+	if(numSlider == 2000)
+			1 + "m"
+	
+	if(numSlider > 3000)
+			Math.round(n)%3000 + "b"
+	
+	if(numSlider > 3000)
+			Math.round(n)%3000 + "t"
+	
+	if(numSlider == 3000)
+			1 + "t"
+
+	if(numSlider >= 4000)
+			"*Valor < 4000"
+
+	if (n == 0)
+			0
+
 	break;
 
 case 2:
