@@ -1,23 +1,31 @@
-# Compiled class file
-*.class
+v = effect("NNum")("Valor").value.toFixed();
+var num =  effect("NNum")("Valor").value.toFixed()*effect("NNum")("Multiplicador");
+num = Comma(num);
+var x = effect("NNum")("Decimais").value;
+Dec = effect("NNum")("Ativar Decimais");
+Limp = effect("NNum")("Limpar texto");
+Edit = effect("NNum")("Editar Nome");
+h = effect("NNum")("Pontos e Vírgulas").value;
+QtdDec = effect("NNum")("Quantidade de decimais");
+n = thisLayer.name = text.sourceText;
 
-# Log file
-*.log
+function Comma(number)
 
-# BlueJ files
-*.ctxt
+{
+number = '' + Math.round(number);
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+if (number.length > 3)
+{
+var mod = number.length % 3;
+var output = (mod > 0 ? (number.substring(0,mod)) : '');
+for (i=0 ; i < Math.floor(number.length / 3); i++)
+{
+if ((mod == 0) && (i == 0))
+output += number.substring(mod+ 3 * i, mod + 3 * i + 3);
+else
+output+= '.' + number.substring(mod + 3 * i, mod + 3 * i + 3);
+}
+return (output);
+}
+else return number;
+}
