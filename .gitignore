@@ -1,214 +1,79 @@
-var stylestext = effect("NNum")("Estilos").value;
-switch (stylestext) {
-	
-case 1:
+function Comma(number,sep) {
+  number = '' + Math.round(number);
+  if (number.length > 3) {
+    var mod = number.length % 3;
+    var output = (mod > 0 ? (number.substring(0,mod)) : '');
+    for (i=0 ; i < Math.floor(number.length / 3); i++) {
+      if ((mod == 0) && (i == 0))
+        output += number.substring(mod+ 3 * i, mod + 3 * i + 3);
+      else
+        output+= sep + number.substring(mod + 3 * i, mod + 3 * i + 3);
+    }
+    return (output);
+  }
+  else return number;
+}
 
-var v = effect("NNum")("Valor").value.toFixed();
-var num =  effect("NNum")("Valor").value.toFixed()*effect("NNum")("Multiplicador");
-var num = Comma(num);
-var x = effect("NNum")("Decimais").value;
+var num = Math.floor(effect("NNum")("Valor").value)*effect("NNum")("Multiplicador");
+var menu = effect("NNum")("Pontos e Vírgulas").value;
+var mySep = menu == 3 || menu == 4 ? "," : ".";
+
+switch (menu){
+  case 3:
+  case 4:
+    var mySep = ",";
+    break;
+  case 5:
+    var mySep = "_";
+    break;
+  case 6:
+    var mySep = " ";
+    break;
+  default:
+    mySep = "."
+    break;
+}
+num = Comma(num,mySep);
+
+var v = Math.floor(effect("NNum")("Valor").value)*effect("NNum")("Multiplicador");
+var x = Math.floor(effect("NNum")("Decimais").value);
 var Dec = effect("NNum")("Ativar Decimais");
 var Limp = effect("NNum")("Limpar texto");
 var Edit = effect("NNum")("Editar Nome");
-var h = effect("NNum")("Pontos e Vírgulas").value;
 var QtdDec = effect("NNum")("Quantidade de decimais");
 var n = thisLayer.name = text.sourceText;
 
-function Comma(number)
-
-{
-number = '' + Math.round(number);
-
-if (number.length > 3)
-{
-var mod = number.length % 3;
-var output = (mod > 0 ? (number.substring(0,mod)) : '');
-for (i=0 ; i < Math.floor(number.length / 3); i++)
-{
-if ((mod == 0) && (i == 0))
-output += number.substring(mod+ 3 * i, mod + 3 * i + 3);
-else
-output+= '.' + number.substring(mod + 3 * i, mod + 3 * i + 3);
-}
-return (output);
-}
-else return number;
-}
-
 	if (Dec == 1)
-			[n+num+","+("0"+x).slice(-QtdDec)]
+		[n+num+","+("0"+x).slice(-QtdDec)]
+	
 else [n+num]
 		
-	if (Dec == 1 && h == 2)
-			[n+num+"."+("0"+x).slice(-QtdDec)]
+	if (Dec == 1 && menu == 2)
+		[n+num+"."+("0"+x).slice(-QtdDec)]
 
 	if (Limp == 1)
-			[num]
-	if (Edit == 1 && Limp == 0)
-			[num+n]
-	if (Edit == 1 && Dec == 1)
-			[num+","+("0"+x).slice(-QtdDec)+n]
+		[num]
 	
-	if (Edit == 1 && Dec == 1 && h == 2)
-			[num+"."+("0"+x).slice(-QtdDec)+n]
+	if (Edit == 1 && Limp == 0)
+		[num+n]
+	
+	if (Edit == 1 && Dec == 1)
+		[num+","+("0"+x).slice(-QtdDec)+n]
+	
+	if (Edit == 1 && Dec == 1 && menu == 2)
+		[num+"."+("0"+x).slice(-QtdDec)+n]
 	
 	if  (Dec == 1 && Limp == 1)
-			[num+","+("0"+x).slice(-QtdDec)]
+		[num+","+("0"+x).slice(-QtdDec)]
 	
-	if  (Dec == 1 && Limp ==1 && h == 2)
-			[num+"."+("0"+x).slice(-QtdDec)]
+	if  (Dec == 1 && Limp ==1 && menu == 2)
+		[num+"."+("0"+x).slice(-QtdDec)]
 	
-	if (h == 6 && Limp == 1)
-			v
-	if (h == 6 && Edit == 1)
-			v + n
+	if (menu == 8 && Limp == 1)
+	    v
+	
+	if (menu == 8 && Edit == 1)
+		v + n
    
-    if (h == 6 && Edit == 0 && Limp == 0)
-			n + v
-	
-	if (h == 5)
-		
-var numSlider = effect("NNum")("Valor").value.toFixed(0);
-var n = numSlider;
-	
-	if (numSlider < 1000)
-			n
-	
-	if(numSlider > 1000)
-		Math.round(n)%1000 + "k"
-	
-	if(numSlider == 1000)
-			1 + "k"
-	
-	if(numSlider > 2000)
-			Math.round(n)%2000 + "m"
-	
-	if(numSlider == 2000)
-			1 + "m"
-	
-	if(numSlider > 3000)
-			Math.round(n)%3000 + "b"
-	
-	if(numSlider > 3000)
-			Math.round(n)%3000 + "t"
-	
-	if(numSlider == 3000)
-			1 + "t"
-
-	if(numSlider >= 4000)
-			"*Valor < 4000"
-
-	if (n == 0)
-			0
-
-	break;
-
-case 2:
-		num = effect("NNum")("Valor");
-num =  "" + Math.round(num/1)*1;
-while (num.length < effect("NNum")("Número de 0s")) num = "0" + num;
-	break;
-
-case 3:
-
-var slider = effect("NNum")("Valor");
-var sec = slider % 60;
-var min = Math.floor(slider/60)%60;
-var hour = Math.floor(slider/3600);
-var days = Math.floor(slider/86400)
-var check = effect("NNum")("Horas");
-var check2 =effect("NNum")("Dias");
-
-function addZero(n){
-if (n < 10) return "0" + n else return n;
-}
-if (check==1) 
-
-addZero(Math.floor(hour)) + ":" 
-+ addZero(Math.floor(min)) + ":"  
-+ addZero(Math.floor(sec ))
-else
-	addZero(Math.floor(min)) 
-+ ":"  + addZero(Math.floor(sec))
-
-if(check==1&&check2==1 || check==0&check2==1)
-	
-	addZero(Math.floor(days ))
-+ ":"  + addZero(Math.floor(hour)) + ":" 
-+ addZero(Math.floor(min)) + ":"  
-+ addZero(Math.floor(sec ))
-
-
-break;
-
-case 4:
-	
-monthnames=["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-
-var Speed = effect("NNum")("Velocidade");
-var din = effect("NNum")("Data Início: #/#/#")[0];
-var moin =effect("NNum")("Data Início: #/#/#")[1];
-var yin = effect("NNum")("Data Início: #/#/#")[2];
-var dout = effect("NNum")("Data Final: #/#/#")[0];
-var mout = effect("NNum")("Data Final: #/#/#")[1];
-var yout = effect("NNum")("Data Final: #/#/#")[2];
-
-var date_1 = new Date(yin,moin,din); // watchout month 0= january, 11=:december !
-milli_1=date_1.getTime();
-
-var date_2 = new Date(yout,mout,dout);
-milli_2=date_2.getTime();
-
-var t = linear(time,0,Speed,milli_1,milli_2);
-
-date_3=new Date(t);
-
- date_3.getDate()+ "/" + monthnames[date_3.getMonth()] + "/" +date_3.getFullYear()  ;
-
-break;
-
-
-default: 
-	
-
-function Comma(number)
-
-{
-number = '' + Math.round(number);
-
-if (number.length > 3)
-{
-var mod = number.length % 3;
-var output = (mod > 0 ? (number.substring(0,mod)) : '');
-for (i=0 ; i < Math.floor(number.length / 3); i++)
-{
-if ((mod == 0) && (i == 0))
-output += number.substring(mod+ 3 * i, mod + 3 * i + 3);
-else
-output+= '.' + number.substring(mod + 3 * i, mod + 3 * i + 3);
-}
-return (output);
-}
-else return number;
-}
-
-if (checkbox==1)
-[name+num+","+("0"+x).slice(-2)]
-
-else [name+num]
-
-	if (Limp == 1)
-			[num]
-	
-	if (Edit == 1)
-			[num+name]
-	
-	if (Edit == 1 && Dec == 1)
-			[num+","+("0"+x).slice(-2)+name]
-	
-	if  (Dec == 1 & Limp == 1)
-			[num+","+("0"+x).slice(-2)];
-};
-	
-		
-	
+    if (menu == 8 && Edit == 0 && Limp == 0)
+		n + v
